@@ -1,0 +1,95 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title th:text="${title}">Login page</title>
+	<link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+<body>
+	<!--		<div class="container">-->
+	<!--			<div class="row">-->
+	<!--				<div class="col-md-8 offset-md-2 mt-3">-->
+	<!--					<div class="my-card">-->
+	<!--						<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">-->
+	<!--							<p th:text="${session.message.content}"></p>-->
+	<!--							<th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
+	<!--						</div>-->
+	<!--						<div class="container text-center"> <img th:src="@{/img/add-user.png}" style="width: 80px;">-->
+	<!--						</div>-->
+	<!--						<h1 class="text-center"><strong>SignUp</strong></h1>-->
+	<!--						<form action="#" th:action="@{/do-register}" method="post" th:object="${user}">-->
+	<!---->
+	<!--							<div class="form-group">-->
+	<!--								<label for="exampleInputEmail1">Name</label>-->
+	<!--								<input type="text" class="form-control" name="name" th:value="${user.name}"-->
+	<!--									id="name_field" aria-describedby="emailHelp" placeholder="Enter name here">-->
+	<!--							</div>-->
+	<!--							<div class="form-group">-->
+	<!--								<label for="email_field">Email address</label>-->
+	<!--								<input type="email" class="form-control" id="exampleInputEmail1" name="email"-->
+	<!--									th:value="${user.email}" aria-describedby="emailHelp" placeholder="Enter email"-->
+	<!--									required>-->
+	<!--								<small id="email_field" class=" form-text text-muted">We'll never share your email with-->
+	<!--									anyone else.</small>-->
+	<!--							</div>-->
+	<!--							<div class="form-group">-->
+	<!--								<label for="password_field">Password</label>-->
+	<!--								<input type="password" name="password" class="form-control" id="password_field"-->
+	<!--									placeholder="Password">-->
+	<!--							</div>-->
+	<!--							<div class="container text-center">-->
+	<!--								<button type="submit" class="btn btn-primary ">Sigup</button>-->
+	<!--								<button type="reset" class="btn bg-warning ">Reset</button>-->
+	<!--							</div>-->
+	<!--						</form>-->
+	<!--					</div>-->
+	<!--				</div>-->
+	<!--			</div>-->
+	<!--<!--		</div>-->
+
+	<div class="container">
+		<div class="cover">
+			<img class="backImg" th:src="@{/img/front.jpg}" alt="">
+			<div class="text">
+				<span class="text-1">Complete miles of journey <br> with one step</span>
+				<span class="text-2">Let's get started</span>
+			</div>
+		</div>
+
+		<div class="forms">
+			<div class="form-content">
+				<div class="login-form">
+					<div class="title">
+						Login
+					</div>
+					<form action="#" th:action="@{/signin}" method="post">
+						<div class="input-boxes">
+							<div class="input-box">
+								<i class="fas fa-envelope"></i>
+								<input type="text" placeholder="Enter your email" name="username">
+							</div>
+							<div class="input-box">
+								<i class="fas fa-lock"></i>
+								<input type="password" placeholder="Enter your password" name="password">
+							</div>
+							<div class="text"><a href="#">Forgot password?</a>
+							</div>
+							<div class="button input-box">
+								<input type="submit" value="SignIn">
+							</div>
+							<div class="text sign-up-text">Don't have an account?
+								<a th:href="@{/signup}">
+									Sigup now</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
