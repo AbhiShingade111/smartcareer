@@ -1,11 +1,16 @@
-<html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="base::Layout(~{::section})">
 
 <head>
-	<title>Access Denied</title>
+<title>Access Denied</title>
 </head>
 
 <body>
-	<h1>You are not allowed to access this page</h1>
+
+	<section>
+
+		<h1>You are not allowed to access this page</h1>
+	</section>
 </body>
 
 </html>
