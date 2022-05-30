@@ -32,12 +32,6 @@ public class Homecontroller {
 		return "access-denied";
 	}
 	
-//	@RequestMapping("/")
-//	public String home(Model model) {
-//		model.addAttribute("title", "Login page");
-//		return "signin";
-//	}
-	
 	@RequestMapping({"/signup"})
 	public String signup(Model model) {
 		model.addAttribute("title", "SignUp page of SmartCareer");
@@ -75,6 +69,7 @@ public class Homecontroller {
 			
 			User result = this.userRepo.save(user);
 			System.out.println(result);
+			model.addAttribute("title", "Sign Up");
 			model.addAttribute("user", result);
 			session.setAttribute("message",new Message("Resgistration successful", "alert-success"));
 			return "signup";
