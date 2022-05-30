@@ -1,123 +1,106 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::Layout(~{::section})">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title th:text="${title}">Login page</title>
-	<link rel="stylesheet" th:href="@{/css/login.css}">
-	<!--	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"-->
-	<!--		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="${title}">Login page</title>
+<!-- <link rel="stylesheet" th:href="@{/css/login.css}"> -->
+<!--	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"-->
+<!--		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
 </head>
 
 <body>
-	<!---->
-	<!--	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
-	<!--		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
-	<!--		crossorigin="anonymous"></script>-->
-	<!--	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"-->
-	<!--		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
-	<!--		crossorigin="anonymous"></script>-->
-	<!--	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"-->
-	<!--		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"-->
-	<!--		crossorigin="anonymous"></script>-->
+	<section class="text-center text-lg-start">
+		<style>
+.cascading-right {
+	margin-right: -50px;
+}
 
+@media ( max-width : 991.98px) {
+	.cascading-right {
+		margin-right: 0;
+	}
+}
+</style>
 
-	<!--		<div class="container">-->
-	<!--			<div class="row">-->
-	<!--				<div class="col-md-8 offset-md-2 mt-3">-->
-	<!--					<div class="my-card">-->
-	<!--						<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">-->
-	<!--							<p th:text="${session.message.content}"></p>-->
-	<!--							<th:block th:text="${#session.removeAttribute('message')}"></th:block>-->
-	<!--						</div>-->
-	<!--						<div class="container text-center"> <img th:src="@{/img/add-user.png}" style="width: 80px;">-->
-	<!--						</div>-->
-	<!--						<h1 class="text-center"><strong>SignUp</strong></h1>-->
-	<!--						<form action="#" th:action="@{/do-register}" method="post" th:object="${user}">-->
-	<!---->
-	<!--							<div class="form-group">-->
-	<!--								<label for="exampleInputEmail1">Name</label>-->
-	<!--								<input type="text" class="form-control" name="name" th:value="${user.name}"-->
-	<!--									id="name_field" aria-describedby="emailHelp" placeholder="Enter name here">-->
-	<!--							</div>-->
-	<!--							<div class="form-group">-->
-	<!--								<label for="email_field">Email address</label>-->
-	<!--								<input type="email" class="form-control" id="exampleInputEmail1" name="email"-->
-	<!--									th:value="${user.email}" aria-describedby="emailHelp" placeholder="Enter email"-->
-	<!--									required>-->
-	<!--								<small id="email_field" class=" form-text text-muted">We'll never share your email with-->
-	<!--									anyone else.</small>-->
-	<!--							</div>-->
-	<!--							<div class="form-group">-->
-	<!--								<label for="password_field">Password</label>-->
-	<!--								<input type="password" name="password" class="form-control" id="password_field"-->
-	<!--									placeholder="Password">-->
-	<!--							</div>-->
-	<!--							<div class="container text-center">-->
-	<!--								<button type="submit" class="btn btn-primary ">Sigup</button>-->
-	<!--								<button type="reset" class="btn bg-warning ">Reset</button>-->
-	<!--							</div>-->
-	<!--						</form>-->
-	<!--					</div>-->
-	<!--				</div>-->
-	<!--			</div>-->
-	<!--<!--		</div>-->
+		<!-- Jumbotron -->
+		<div class="container py-4">
+			<div class="row g-0 align-items-center">
+				<div class="col-lg-6 mb-5 mb-lg-0">
+					<div class="card cascading-right"
+						style="background: hsla(0, 0%, 90%, 0.55); backdrop-filter: blur(30px);">
+						<div class="card-body p-5 shadow-5">
+							<div class="text-center">
+								<h2 class="fw-bold mb-5 text-center">Sign up now</h2>
+							</div>
+							<div th:if="${session.message}"
+								th:classappend="${session.message.type}" role="alert"
+								class="alert">
+								<p th:text="${session.message.content}"></p>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+							<form th:object="${user}" method="post"
+								th:action="@{/do-register}">
+								<div class="mb-3">
+									<input name="name" type="text" class="form-control"
+										th:classappend="${#fields.hasErrors('name')} ? 'is-invalid':''"
+										th:value="${user.name}" id="exampleFormControlInput1"
+										placeholder="Enter your full name"> <label
+										for="exampleFormControlInput1" class="form-label">Name</label>
+									<div th:each="e : ${#fields.errors('name')}" th:text="${e}"
+										th:classappend="invalid-feedback"></div>
+								</div>
 
-	<div class="container mt-3">
-		<div class="cover">
-			<div class="front">
-				<img th:src="@{/img/backImg.jpg}" alt="">
-				<div class="text">
-					<span class="text-1"><strong><u>SmartCareer</u></strong></span></br>
-					<span class="text-2">Start your journey with Us</span>
-				</div>
-			</div>
-		</div>
-		<div class="forms">
-			<div class="form-content">
-				<div class="login-form">
-					<div class="title">
-						SignUp
-					</div>
-					<div th:if="${session.message}" th:classappend="${session.message.type}" role="alert">
-						<p th:text="${session.message.content}"></p>
-						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
-					</div>
+								<!-- Email input -->
+								<div class="form-outline mb-4">
+									<input name="email" type="email" id="form3Example3"
+										class="form-control"
+										th:classappend="${#fields.hasErrors('email')} ? 'is-invalid':''"
+										th:value="${user.email}" placeholder="Enter your email id" />
+									<label class="form-label" for="form3Example3">Email
+										address</label>
+									<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+										th:classappend="invalid-feedback"></div>
+								</div>
 
-					<form action="#" th:action="@{/do-register}" method="post" th:object="${user}">
-						<div class="input-boxes">
-							<div class="input-box">
-								<i class="fas fa-user"></i>
-								<input type="text" th:value="${user.name}" placeholder="Enter your name" name="name">
-							</div>
-							<div th:each="e : ${#fields.errors('name')}" th:text="${e}" style="color: red;">
-							</div>
-							<div class="input-box">
-								<i class="fas fa-envelope"></i>
-								<input type="text" placeholder="Enter your email" th:value="${user.email}" name="email">
-							</div>
-							<div th:each="e : ${#fields.errors('email')}" th:text="${e}" style="color: red;">
-							</div>
-							<div class="input-box">
-								<i class="fas fa-lock"></i>
-								<input type="password" placeholder="Enter your password" name="password">
-							</div>
-							<div th:each="e : ${#fields.errors('password')}" th:text="${e}" style="color: red;">
-							</div>
-							<div class="button input-box">
-								<input type="submit" value="SignUp">
-							</div>
-							<div class="text sign-up-text">Already have an account?
-								<a th:href="@{/signin}">
-									Login now</a>
-							</div>
+								<!-- Password input -->
+								<div class="form-outline mb-4">
+									<input name="password" type="password" id="form3Example4"
+										class="form-control"
+										th:classappend="${#fields.hasErrors('password')} ? 'is-invalid':''"
+										placeholder="Enter your password" /> <label
+										class="form-label" for="form3Example4">Password</label>
+									<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+										th:classappend="invalid-feedback"></div>
+								</div>
+
+								<!-- Submit button -->
+								<div class="text-center">
+									<button type="submit" class="btn btn-danger btn-block mb-4">
+										Sign up</button>
+								</div>
+
+								<p class="mb-5 pb-lg-2 text-center" style="color: #393f81;">
+									Already have an account? <a th:href="@{/signin}"
+										href="login.html" style="color: #393f81;">Login here</a>
+								</p>
+							</form>
 						</div>
-					</form>
+					</div>
+				</div>
+
+
+				<div class="col-lg-6 mb-5 mb-lg-0">
+					<img
+						src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+						class="w-100 rounded-4 shadow-4" alt="" />
 				</div>
 			</div>
 		</div>
-	</div>
+		<!-- Jumbotron -->
+	</section>
 </body>
 
 </html>
