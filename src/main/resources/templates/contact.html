@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	th:replace="base::Layout(~{::section})">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<!-- <link -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" -->
+<!-- 	rel="stylesheet" -->
+<!-- 	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" -->
+<!-- 	crossorigin="anonymous"> -->
+</head>
+<body>
+	<!--Section: Contact v.2-->
+	<section>
+		<div class="container col-md-8"
+			style="background: hsla(0, 0%, 90%, 0.55);">
+
+			<!--Section heading-->
+			<h2 class="h1-responsive font-weight-bold text-center my-4">Contact
+				us</h2>
+			<!--Section description-->
+			<p class="text-center w-responsive mx-auto mb-5">Do you have any
+				questions? Please do not hesitate to contact us directly. Our team
+				will come back to you within a matter of hours to help you.</p>
+
+			<div th:if="${session.message}"
+				th:classappend="${session.message.type}" class="alert" role="alert">
+				<p th:text="${session.message.content}"></p>
+				<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+			</div>
+			<form action="#" th:action="@{/send}" th:object="${contactmail}"
+				method="POST">
+				<input type="hidden" th:field="*{cmid}">
+				<!--Grid column-->
+				<div class="md-form mb-0 mt-3">
+					<input type="text" id="name" th:value="${contactmail.name}"
+						th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+						name="name" th:field="*{name}" class="form-control"> <label
+						for="name" class="">Your name</label>
+
+					<div th:each="e : ${#fields.errors('name')}" th:text="${e}"
+						th:classappend="invalid-feedback"></div>
+				</div>
+
+				<div class="md-form mb-0 mt-3">
+					<input type="email"
+						th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : '' "
+						th:value="${contactmail.email}" th:field="*{email}" id="email"
+						name="email" class="mr-auto form-control" style="width: 100%;">
+					<label for="email" class="">Your email</label>
+					<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+						th:classappend="invalid-feedback"></div>
+				</div>
+				<!--Grid row-->
+
+				<!--Grid row-->
+				<div class="md-form mb-0 mt-3">
+					<input type="text"
+						th:classappend="${#fields.hasErrors('subject')} ? 'is-invalid' : '' "
+						th:value="${contactmail.subject}" th:field="*{subject}"
+						id="subject" name="subject" class="form-control"> <label
+						for="subject" class="">Subject</label>
+					<div th:each="e : ${#fields.errors('subject')}" th:text="${e}"
+						th:classappend="invalid-feedback"></div>
+				</div>
+				<!--Grid row-->
+
+				<!--Grid row-->
+				<div class="md-form mt-3">
+					<textarea type="text"
+						th:classappend="${#fields.hasErrors('textmessage')} ? 'is-invalid' : '' "
+						th:value="${contactmail.textmessage}" th:field="*{textmessage}"
+						id="message" name="textmessage" rows="5"
+						class="form-control md-textarea"></textarea>
+					<label for="message">Your message</label>
+					<div th:each="e : ${#fields.errors('textmessage')}" th:text="${e}"
+						th:classappend="invalid-feedback"></div>
+				</div>
+
+				<!--Grid row-->
+					<div class="text-center">
+						<button class="btn btn-danger" type="submit">Send</button>
+					</div>
+			</form>
+
+
+		</div>
+	</section>
+
+
+</body>
+</html>

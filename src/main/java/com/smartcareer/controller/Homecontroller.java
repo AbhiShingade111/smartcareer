@@ -9,17 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.smartcareer.entities.Contactmail;
 import com.smartcareer.entities.User;
 import com.smartcareer.helper.Message;
+import com.smartcareer.repo.ContactJpaRepository;
 import com.smartcareer.repo.UserJpaRepository;
 
 @Controller
 public class Homecontroller {
 
+	@Autowired
+	private ContactJpaRepository contactjpa;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -34,7 +37,7 @@ public class Homecontroller {
 	
 	@RequestMapping({"/signup"})
 	public String signup(Model model) {
-		model.addAttribute("title", "SignUp page of SmartCareer");
+		model.addAttribute("title", "SignUp page");
 		model.addAttribute("user", new User());
 		return "signup";
 	}
@@ -44,6 +47,38 @@ public class Homecontroller {
 		model.addAttribute("title", "Login page");
 		return "signin";
 	}
+	
+	@RequestMapping("/contact")
+	public String contact(Model model) {
+		model.addAttribute("title", "Contact us");
+		model.addAttribute("contactmail", new Contactmail());
+		return "contact";
+	}
+	
+	@RequestMapping(value = "/send",method = RequestMethod.POST)
+	public String sendcontact(@Valid @ModelAttribute("contactmail") Contactmail contactmail,BindingResult thResult,Model model,HttpSession session) {
+		
+		try {
+			if(thResult.hasErrors()) {
+				model.addAttribute("contactmail", contactmail);
+				return "contact";
+			}
+			
+			Contactmail contact = this.contactjpa.save(contactmail);
+			System.out.println(contact);
+			model.addAttribute("title", "Contact us");
+//			model.addAttribute("contactmail", contact);
+			session.setAttribute("message", new Message("Thank you connecting with us", "alert-success"));
+			return "contact";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("title", "Contact us");
+			session.setAttribute("message", new Message("Something went wrong", "alert-danger"));
+			return "contact";
+		}
+	}
+	
 	
 	@RequestMapping(value = "/do-register",method = RequestMethod.POST)
 	public String registration(@Valid @ModelAttribute("user") User user,BindingResult theResult,Model model,HttpSession session) { 
