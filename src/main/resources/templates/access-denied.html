@@ -7,14 +7,17 @@
 
 <body >
 
-	<section style="background: white !important; height: 100%; width: 100%;">
+	<section style="background: white !important; height: 100%; width: 100%; padding-top: 30px;">
 		<img class="img-fluid mx-auto d-block"
-			src="https://mdbootstrap.com/img/Others/404_mdb.webp">
+			src="https://mdbootstrap.com/img/Others/404_mdb.webp" th:src="@{/img/accessDenied.png}">
 
 		<div class="text-center mt-2">
-			<h2>Oops! This obviously isn't a page you are looking for :)</h2>
-			<h6>Please, Use one of the above links to navigate back to safe
-				harbor</h6>
+		
+			<h2>You don't have permission to access this page :(</h2>
+			<h6>Please, check your credential and try again</h6>
+<!-- 			<h2>Oops! This obviously isn't a page you are looking for :)</h2> -->
+<!-- 			<h6>Please, Use one of the above links to navigate back to safe -->
+<!-- 				harbor</h6> -->
 		</div>
 	</section>
 </body>
